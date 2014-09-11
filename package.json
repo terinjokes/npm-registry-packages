@@ -1,0 +1,27 @@
+{
+  "name": "npm-registry-packages",
+  "description": "Packages on an npm registry",
+  "version": "1.0.0",
+  "author": "Terin Stock <terinjokes@gmail.com> (https://terinstock.com/)",
+  "bugs": {
+    "url": "https://github.com/terinjokes/npm-registry-packages/issues"
+  },
+  "homepage": "https://github.com/terinjokes/npm-registry-packages",
+  "keywords": [
+    "npm",
+    "registry"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/terinjokes/npm-registry-packages"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "nub": "0.0.0",
+    "request": "^2.42.0"
+  }
+}
