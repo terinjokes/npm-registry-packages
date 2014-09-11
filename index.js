@@ -1,11 +1,11 @@
 'use strict';
 // vim: set expandtab:
-var request = require('request');
+var request = require('request').defaults({ json: true });
 var url = require('url');
 var nub = require('nub');
 
 function getPkgs(registry, cb) {
-  request(url.resolve(registry + '/', '-/_view/allVersions?reduce=false'), {json:true}, function(err, res, body) {
+  request(url.resolve(registry + '/', '-/_view/allVersions?reduce=false'), function(err, res, body) {
     if (err) {
       return cb(err);
     }
