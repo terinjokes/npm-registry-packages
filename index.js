@@ -15,6 +15,10 @@ function getPkgs(registry, cb) {
       return cb(err);
     }
 
+    if (!Array.isArray(body.rows)) {
+      return cb(null, []);
+    }
+
     cb(null, nub(body.rows.map(function(row) {
       return row.id;
     })));
