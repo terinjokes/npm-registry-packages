@@ -1,28 +1,56 @@
 'use strict';
-// vim: set expandtab:
-var request = require('request').defaults({ json: true });
 var url = require('url');
+var hyperquest = require('hyperquest');
+var bl = require('bl');
 var nub = require('nub');
 
+function parse(data) {
+  var parsed = {
+    val: null,
+    err: null
+  };
+
+  try {
+    parsed.val = JSON.parse(data);
+  } catch (err) {
+    parsed.err = err;
+  }
+
+  return parsed;
+}
+
 function getPkgs(registry, cb) {
-  request(url.resolve(registry + '/', '-/_view/allVersions?reduce=false'), function(err, res, body) {
+  var req = hyperquest({
+    uri: url.resolve(registry + '/', '-/_view/allVersions?reduce=false')
+  });
+
+  req.pipe(bl(function (err, data) {
     if (err) {
-      return cb(err);
+      cb(err);
+      return;
     }
 
-    if (res.statusCode !== 200) {
-      err = new Error('received non-200 status code');
-      return cb(err);
+    if (req.response.statusCode !== 200) {
+      cb(new Error('received non-200 status code'));
+      return;
     }
 
-    if (!Array.isArray(body.rows)) {
-      return cb(null, []);
+    var parsed = parse(String(data));
+
+    if (parsed.err !== null) {
+      cb(parsed.err);
+      return;
     }
 
-    cb(null, nub(body.rows.map(function(row) {
+    if (!Array.isArray(parsed.val.rows)) {
+      cb(null, []);
+      return;
+    }
+
+    cb(null, nub(parsed.val.rows.map(function (row) {
       return row.id;
     })));
-  });
+  }));
 }
 
 module.exports = getPkgs;
