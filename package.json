@@ -1,7 +1,7 @@
 {
   "name": "npm-registry-packages",
   "description": "Packages on an npm registry",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Terin Stock <terinjokes@gmail.com> (https://terinstock.com/)",
   "bugs": {
     "url": "https://github.com/terinjokes/npm-registry-packages/issues"
