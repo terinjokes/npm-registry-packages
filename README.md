@@ -1,5 +1,7 @@
 # npm-registry-packages
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/terinjokes/npm-registry-packages.svg)](https://greenkeeper.io/)
+
 > Fetch the packages names on an npm registry.
 
 ## Installation
